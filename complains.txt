@@ -1,0 +1,7 @@
+c359781,o736227,c2,malaysian,good but too much oil,poppy,no complaint,Unresolved
+c780709,o428437,c2,indian,that was too spicy,poppy,no complaint,Unresolved
+c985240,o308897,c2,malaysian,no complaint,abs,30 mins late,Unresolved
+c935892,o741550,c1,indian,no comaplint,abs,incredibly rude,Unresolved
+c108909,o598616,c1,arab,no comaplint,poppy,was late by 10 mins,Unresolved
+c919526,o776225,c1,malaysian,no comaplint,abs,did not pick up,Unresolved
+c646929,o315607,c3,indian,no complaint,riri,kinda late,Unresolved

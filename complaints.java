@@ -1,0 +1,433 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package final_assignment;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+/**
+ *
+ * @author Lenovo
+ */
+public class complaints extends javax.swing.JFrame {
+    public String vendor_name;    
+    public String runner_name;
+    public String order_id;
+    public String vendor_complaint;
+    public String runner_complaint;
+    
+    public String vendor_role = "vendor";        
+    public String runner_role = "runner";
+    public String A = "123";
+    public String B = "456";
+    public String C = "789";
+    
+    ArrayList<users> userlist = new ArrayList<>();
+    ArrayList<customer_order_history> customerorderhistorylist = new ArrayList<>();
+    public String customer_id;
+    ArrayList<holduserdata> helduserlist = new ArrayList<>();
+    /**
+     * Creates new form complaints
+     */
+    public complaints() {
+        initComponents();
+        
+        //get logged in user id
+        try{
+            helduserlist = dataloader.loadheldusers("holduserdata.txt");
+            
+            for (holduserdata heldusers : helduserlist)
+            {
+                customer_id = heldusers.getUserId();
+            }
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+        //get order id for user id
+        try
+        {
+            customerorderhistorylist = dataloader.loadcustomerorderhistory("the_customer_order_history.txt");            
+            ArrayList<customer_order_history> filtered_order_id = new ArrayList<>();           
+            for (customer_order_history order_history : customerorderhistorylist)
+            {
+                if (order_history.getUser_id().equals(customer_id))
+                {
+                    filtered_order_id.add(order_history);
+                }                
+            }            
+            for (customer_order_history ids : filtered_order_id)
+            {                
+                cboorderid.addItem(ids.getOrder_id());
+            }            
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+        //load vendor & runner name
+        try
+        {
+            userlist = dataloader.loadusers("users.txt");
+            
+            ArrayList<users> filtered_vendor_userlist = new ArrayList<>();
+            ArrayList<users> filtered_runner_userlist = new ArrayList<>();
+            
+            for (users user : userlist)
+            {
+                if (user.getUser_role().equals(vendor_role))
+                {
+                    filtered_vendor_userlist.add(user);
+                }
+                else if (user.getUser_role().equals(runner_role))
+                {
+                    filtered_runner_userlist.add(user);
+                }
+            }
+            
+            for (users vendor : filtered_vendor_userlist) {
+                cbovendorname.addItem(vendor.getUser_name());
+            }
+            
+            for (users runner : filtered_runner_userlist) {
+                cborunnername.addItem(runner.getUser_name());
+            }
+            
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+        //action listner
+        cbovendorname.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            vendor_name = cbovendorname.getSelectedItem().toString();
+        }
+        });
+        
+        txtvendorcomplaint.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            vendor_complaint = txtvendorcomplaint.getText().toString();
+        }
+        });
+        
+        cborunnername.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            runner_name = cborunnername.getSelectedItem().toString();
+        }
+        });
+        
+        txtrunnercomplaint.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            runner_complaint = txtrunnercomplaint.getText().toString();
+        }
+        });
+        
+       
+       cboorderid.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            order_id = cboorderid.getSelectedItem().toString();
+        }
+        });
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cboorderid = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        cbovendorname = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        txtvendorcomplaint = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        cborunnername = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        txtrunnercomplaint = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        btnsubmit = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 249, 224));
+
+        jLabel2.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel2.setText("If you would like to make a complaint for just one staff member (vendor or runner) then");
+
+        jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel3.setText("for the other staff member please enter no complaint:");
+
+        jLabel4.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel4.setText("Order ID:");
+
+        cboorderid.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel5.setText("Vendor name:");
+
+        cbovendorname.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel6.setText("Complaint for a vendor:");
+
+        txtvendorcomplaint.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel7.setText("Delivery runner name:");
+
+        cborunnername.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel8.setText("Complaint for a delivery runner:");
+
+        txtrunnercomplaint.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+
+        jPanel2.setBackground(new java.awt.Color(151, 214, 207));
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel9.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 48)); // NOI18N
+        jLabel9.setText("Complain");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(216, 216, 216)
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel9)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(151, 214, 207));
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        btnsubmit.setBackground(new java.awt.Color(255, 249, 224));
+        btnsubmit.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        btnsubmit.setText("Submit");
+        btnsubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsubmitActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(255, 249, 224));
+        jButton1.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnsubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnsubmit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel6))
+                                    .addGap(64, 64, 64)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtvendorcomplaint, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbovendorname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cboorderid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel7))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cborunnername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtrunnercomplaint, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 76, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(cboorderid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(cbovendorname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtvendorcomplaint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(cborunnername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(txtrunnercomplaint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
+        //attributes
+        vendor_complaint = txtvendorcomplaint.getText().trim();
+        runner_complaint = txtrunnercomplaint.getText().trim();
+        
+        //complaint id
+        String complain_id = Complaint.generatecomplaintID();
+        
+        //status
+        String complaint_status = "Unresolved";
+        
+        //writing into complains.txt
+        Complaint.writeComplaintToFile(complain_id, order_id, customer_id, vendor_name, vendor_complaint, runner_name, runner_complaint, complaint_status);
+        javax.swing.JOptionPane.showMessageDialog(this, "Submitted");       
+    }//GEN-LAST:event_btnsubmitActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        customer c = new customer();
+        c.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(complaints.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(complaints.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(complaints.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(complaints.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new complaints().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnsubmit;
+    private javax.swing.JComboBox<String> cboorderid;
+    private javax.swing.JComboBox<String> cborunnername;
+    private javax.swing.JComboBox<String> cbovendorname;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField txtrunnercomplaint;
+    private javax.swing.JTextField txtvendorcomplaint;
+    // End of variables declaration//GEN-END:variables
+}

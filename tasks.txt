@@ -1,0 +1,10 @@
+t1,o1,r3,abc,completed,30.00,12-01-2025
+t2,o2,r2,xyz,declined,18.25,12-01-2025
+t3,o3,r3,aaa,ready to pick up,50.00,21-01-2025
+t4,o3,r3,kl,completed,34.00,15-01-2025
+t5,o4,r4,def,delivered,25.00,18-01-2025
+t6,o1,r4,lmn,ready to pick up,20.00,20-01-2025
+t7,o2,r5,def,completed,15.50,21-01-2025
+t8,o1,r6,qrs,ready to pick up,18.75,24-01-2025
+t9,o1,r6,qrs,declined,18.75,24-01-2025
+t10,o1,r6,qrs,completed,18.75,24-01-2025

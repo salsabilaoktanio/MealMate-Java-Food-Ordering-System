@@ -1,0 +1,12 @@
+c1,14.0,t702332,deducted,16.0,o741550
+c1,6.0,t261528,deducted,10.0,o598616
+c2,8.0,t812518,deducted,22.0,o736227
+c2,11.0,t946268,deducted,11.0,o428437
+c1,7.0,t450694,deducted,3.0,o776225
+c2,11.0,t474508,deducted,0.0,o308897
+c3,0.0,t714162,new,0.0,none
+c4,0.0,t619187,new,0.0,none
+c3,70.00,txn1,topup,70.00,none
+c3,14.0,t805742,deducted,56.0,o315607
+c3,14.00,txn2,updated,70.00,none
+c3,14.0,t149775,deducted,56.0,o988145

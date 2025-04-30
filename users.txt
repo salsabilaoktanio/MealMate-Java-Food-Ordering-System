@@ -1,0 +1,15 @@
+
+a1, 123, admin, john
+a2, 345, admin, lily
+c1, 888, customer, mike
+c2, 553, customer, ally
+m1, 333, manager, andrew
+m2, 352, manager, gill
+mv, 333, vendor, malaysian
+iv, 204, vendor, indian
+av, 200, vendor, arab
+r1, 299, runner, abs
+r2, 553, runner, poppy
+c3, 555, customer, Jonathan
+wv, 333, vendor, western
+r3, 999, runner, riri

@@ -1,0 +1,463 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package final_assignment;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+
+/**
+ *
+ * @author Lenovo
+ */
+public class writereviews extends javax.swing.JFrame {
+    public String vendor_name;    
+    public String runner_name;
+    public String vendor_review;
+    public String runner_review;
+    public String order_id;
+    public String firstnumber;
+    public String secondnumber;
+    public String customer_id;
+    
+    public String vendor_role = "vendor";        
+    public String runner_role = "runner";    
+    public String A = "123";
+    public String B = "456";
+    public String C = "789";
+    
+    ArrayList<users> userlist = new ArrayList<>();
+    ArrayList<customer_order_history> customerorderhistorylist = new ArrayList<>();
+    ArrayList<holduserdata> helduserlist = new ArrayList<>();
+    /**
+     * Creates new form writereviews
+     */
+    public writereviews() {
+        initComponents();
+        
+        //get user id
+        try{
+            helduserlist = dataloader.loadheldusers("holduserdata.txt");            
+            for (holduserdata heldusers : helduserlist)
+            {
+                customer_id = heldusers.getUserId();
+            }
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+        //load order id
+        try
+        {
+            customerorderhistorylist = dataloader.loadcustomerorderhistory("the_customer_order_history.txt");            
+            ArrayList<customer_order_history> filtered_order_id = new ArrayList<>();           
+            for (customer_order_history order_history : customerorderhistorylist)
+            {
+                if (order_history.getUser_id().equals(customer_id))
+                {
+                    filtered_order_id.add(order_history);
+                }                
+            }            
+            for (customer_order_history ids : filtered_order_id)
+            {                
+                cboorderid.addItem(ids.getOrder_id());
+            }            
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+        //get vendor name
+        try
+        {
+            userlist = dataloader.loadusers("users.txt");
+            
+            ArrayList<users> filtered_vendor_userlist = new ArrayList<>();
+            ArrayList<users> filtered_runner_userlist = new ArrayList<>();
+            
+            for (users user : userlist)
+            {
+                if (user.getUser_role().equals(vendor_role))
+                {
+                    filtered_vendor_userlist.add(user);
+                }
+                else if (user.getUser_role().equals(runner_role))
+                {
+                    filtered_runner_userlist.add(user);
+                }
+            }
+            
+            for (users vendor : filtered_vendor_userlist) {
+                cbovendorname.addItem(vendor.getUser_name());
+            }
+            
+            for (users runner : filtered_runner_userlist) {
+                cborunnername.addItem(runner.getUser_name());
+            }
+            
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        } 
+        
+        //action listners
+        
+        cbovendorname.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            vendor_name = cbovendorname.getSelectedItem().toString();
+        }
+        });
+        
+        txtvendorreview.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            vendor_review = txtvendorreview.getSelectedText().toString();
+        }
+        });
+        
+        cborunnername.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            runner_name = cborunnername.getSelectedItem().toString();
+        }
+        });
+        
+        txtrunnerreview.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            runner_review = txtrunnerreview.getSelectedText().toString();
+        }
+        });
+               
+       cboorderid.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            order_id = cboorderid.getSelectedItem().toString();
+        }
+        });
+       
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        btnread = new javax.swing.JButton();
+        btnsubmit = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cboorderid = new javax.swing.JComboBox<>();
+        cbovendorname = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtvendorreview = new javax.swing.JTextField();
+        cborunnername = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtrunnerreview = new javax.swing.JTextField();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 249, 224));
+
+        jPanel2.setBackground(new java.awt.Color(151, 214, 207));
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel9.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 36)); // NOI18N
+        jLabel9.setText("Write a Review");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(207, 207, 207))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel9)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(151, 214, 207));
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        btnread.setBackground(new java.awt.Color(255, 249, 224));
+        btnread.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        btnread.setText("Back");
+        btnread.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreadActionPerformed(evt);
+            }
+        });
+
+        btnsubmit.setBackground(new java.awt.Color(255, 249, 224));
+        btnsubmit.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        btnsubmit.setText("Submit");
+        btnsubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsubmitActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnread))
+                    .addComponent(btnsubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnread)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnsubmit)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBackground(new java.awt.Color(151, 214, 207));
+        jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel7.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel7.setText("If you would like to write a review for just one staff member (vendor or runner) then");
+
+        jLabel8.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel8.setText("for the other staff member please enter no review:");
+
+        jLabel2.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel2.setText("Order ID:");
+
+        cboorderid.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+
+        cbovendorname.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel3.setText("Vendor name:");
+
+        jLabel4.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel4.setText("Review for a vendor:");
+
+        txtvendorreview.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        txtvendorreview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtvendorreviewActionPerformed(evt);
+            }
+        });
+
+        cborunnername.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel5.setText("Delivery runner name:");
+
+        jLabel6.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        jLabel6.setText("Review for a delivery runner:");
+
+        txtrunnerreview.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel5)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2))
+                            .addGap(100, 100, 100)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cboorderid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtvendorreview, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbovendorname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addGap(31, 31, 31)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtrunnerreview, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cborunnername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(1, 1, 1)))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel4))
+                .addContainerGap(117, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel7)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cboorderid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbovendorname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(txtvendorreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(cborunnername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtrunnerreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
+        //attribute
+        vendor_review = txtvendorreview.getText().trim();
+        runner_review = txtrunnerreview.getText().trim();
+        
+        //review id
+        String review_id = review.generatereviewID();
+
+        //writing a review
+        review.writeReview(review_id, order_id, customer_id, vendor_name, vendor_review, runner_name, runner_review);
+        javax.swing.JOptionPane.showMessageDialog(this, "Submitted");
+    }//GEN-LAST:event_btnsubmitActionPerformed
+
+    private void txtvendorreviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvendorreviewActionPerformed
+        //
+    }//GEN-LAST:event_txtvendorreviewActionPerformed
+
+    private void btnreadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreadActionPerformed
+        reviews r = new reviews();
+        r.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_btnreadActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(writereviews.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(writereviews.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(writereviews.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(writereviews.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new writereviews().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnread;
+    private javax.swing.JButton btnsubmit;
+    private javax.swing.JComboBox<String> cboorderid;
+    private javax.swing.JComboBox<String> cborunnername;
+    private javax.swing.JComboBox<String> cbovendorname;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JTextField txtrunnerreview;
+    private javax.swing.JTextField txtvendorreview;
+    // End of variables declaration//GEN-END:variables
+}

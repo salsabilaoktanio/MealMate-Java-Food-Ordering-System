@@ -1,0 +1,17 @@
+mv,malaysian,mv1,nasi lemak,8.0
+mv,malaysian,mv2,hokkien mee,9.0
+mv,malaysian,mv3,hainanese chicken rice,11.0
+mv,malaysian,mv4,nasi dagang,8.0
+mv,malaysian,mv5,roti canai,6.0
+iv,indian,iv1,butter chicken,12.0
+iv,indian,iv2,biryani,9.0
+iv,indian,iv3,masala dosa,7.0
+iv,indian,iv4,naan,5.0
+iv,indian,iv5,rogan josh,10.0
+av,arab,av1,makluba,12.0
+av,arab,av2,mandi,12.0
+av,arab,av3,chicken shawarma,9.0
+av,arab,av4,falafel,7.0
+av,arab,av5,hummus,6.0
+wv,western,wv1,burger,10.0
+wv,western,wv2,pasta,12.0

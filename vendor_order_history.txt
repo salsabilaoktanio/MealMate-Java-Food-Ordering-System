@@ -1,0 +1,8 @@
+o741550,c1,indian,butter chicken,12.0,Delivery,Placed,14.0,01:50:45 2025-02-22,adam.st
+o598616,c1,arab,hummus,6.0,Take away,Placed,6.0,01:55:24 2025-02-22,No need
+o736227,c2,malaysian,nasi lemak,8.0,Dine in,Placed,8.0,01:57:09 2025-02-22,No need
+o428437,c2,indian,biryani,9.0,Delivery,Ready,11.0,01:57:54 2025-02-22,charles.st
+o776225,c1,indian,masala dosa,7.0,Dine in,Placed,7.0,01:59:23 2025-02-22,No need
+o308897,c2,malaysian,hainanese chicken rice,11.0,Take away,Placed,11.0,02:00:29 2025-02-22,No need
+o315607,c3,indian,butter chicken,12.0,Delivery,Cancelled,14.0,06:12:02 2025-02-22,adam.st
+o988145,c3,indian,butter chicken,12.0,Delivery,Cancelled,14.0,06:27:49 2025-02-22,adam.st
